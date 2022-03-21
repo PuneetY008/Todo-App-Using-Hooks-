@@ -7,7 +7,7 @@ import TodoForm from './TodoForm';
 import useTodoState from './hooks/useTodoState';
 
 function TodoApp(){
-    const initialTodos = JSON.parse(window.localStorage.getItem('todos') || "[]");
+    const initialTodos = [{id: 1, task: "Pet a monkey", completed: false}];
     const {todos,addTodo,removeTodo,toggleTodo,editTodo} = useTodoState(initialTodos)
     // const initialTodos = [
     //     {id:1, task: "Clean Tank", completed: false},
@@ -16,9 +16,7 @@ function TodoApp(){
     // ];
     
 
-    useEffect(()=> {
-        window.localStorage.setItem("todos", JSON.stringify(todos));
-    },[todos]);
+    
 
     
 
@@ -37,7 +35,7 @@ function TodoApp(){
                     <Typography color='inherit'>Todos With Hooks</Typography>
                 </Toolbar>
             </AppBar>
-            <Grid container justify='center' style={{marginTop: '1rem'}}>
+            <Grid container justifyContent='center' style={{marginTop: '1rem'}}>
                 <Grid item xs={11} md={8} lg={4}>
                     <TodoForm addTodo= {addTodo} />
                     <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} 
