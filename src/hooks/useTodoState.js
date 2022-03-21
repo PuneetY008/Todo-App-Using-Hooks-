@@ -1,0 +1,33 @@
+import React,{useState} from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+export default initialTodos => {
+    const [todos,setTodos] = useState(initialTodos);
+    
+    return {
+        todos,
+        addTodo: newTodoText => {
+            setTodos([...todos, {id: uuidv4(), task: newTodoText,completed: false}]);
+        },
+
+        removeTodo: (todoId) => {
+            //filter out removed one
+            const updatedTodos = todos.filter(todo=> todo.id !== todoId);
+            //set setTodos
+            setTodos(updatedTodos);
+        },
+        toggleTodo: todoId => {
+            const updatedTodos = todos.map(todo=>
+                    todo.id === todoId? {...todo, completed: !todo.completed} : todo
+                );
+                setTodos(updatedTodos);
+        },
+        editTodo: (todoId, newTask) => {
+            const updatedTodos = todos.map(todo=>
+                todo.id === todoId? {...todo, task: newTask} : todo
+            );
+            setTodos(updatedTodos);
+        }
+    }
+}
+
