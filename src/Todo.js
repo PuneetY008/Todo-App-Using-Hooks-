@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import {
   ListItem,
   ListItemText,
@@ -47,4 +47,4 @@ function Todo({ task, completed, id }) {
   );
 }
 
-export default Todo;
+export default memo(Todo);
