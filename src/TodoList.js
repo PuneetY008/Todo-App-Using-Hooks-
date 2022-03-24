@@ -1,30 +1,30 @@
-import React from 'react';
-import { Paper,List,ListItem,Divider,ListItemText, } from '@material-ui/core';
+import React, { useContext } from "react";
+import {
+  Paper,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+} from "@material-ui/core";
 import Todo from "./Todo";
+import { TodosContext } from "./contexts/todos.context";
 
-function TodoList(props){
-    if(props.todos.length)
+function TodoList() {
+  const { todos } = useContext(TodosContext);
+  if (todos.length)
     return (
-        <Paper>
-            <List>
-                {props.todos.map((todo,i)=> (
-                    <>
-                    <Todo 
-                    id={todo.id}
-                    task={todo.task} 
-                    key={todo.id} 
-                    completed={todo.completed}
-                    removeTodo={props.removeTodo} 
-                    toggleTodo={props.toggleTodo}
-                    editTodo={props.editTodo}
-                    />
-                    {i< props.todos.length-1 && <Divider />}
-                    </>  
-                ))}
-            </List>
-        </Paper>
+      <Paper>
+        <List>
+          {todos.map((todo, i) => (
+            <>
+              <Todo {...todo} key={todo.id} />
+              {i < todos.length - 1 && <Divider />}
+            </>
+          ))}
+        </List>
+      </Paper>
     );
-    return null;
+  return null;
 }
 
 export default TodoList;
